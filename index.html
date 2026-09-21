@@ -592,7 +592,7 @@ dialog::backdrop{background:rgba(10,18,40,.65);backdrop-filter:blur(5px)}
 .idea p{margin:0 0 12px;color:var(--muted);font-size:.94rem}
 .idea .lv{font-size:.82rem;font-weight:700;color:var(--ok);letter-spacing:.01em}
 /* packages */
-.pks{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;align-items:stretch}
+.pks{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;align-items:stretch;padding:12px 4px 8px}
 .pk{
   position:relative;overflow:hidden;background:#fff;border:1px solid var(--line);border-radius:20px;
   padding:36px 32px;display:flex;flex-direction:column;gap:16px;box-shadow:var(--shadow-sm);
@@ -622,7 +622,13 @@ dialog::backdrop{background:rgba(10,18,40,.65);backdrop-filter:blur(5px)}
   align-self:flex-start;background:linear-gradient(135deg,var(--gold),#FFD56A);
   color:var(--navy);font-weight:800;font-size:.8rem;padding:5px 14px;border-radius:99px
 }
-.pnote{text-align:center;color:var(--muted);margin:28px 0 0;font-size:.96rem}
+.pnote{text-align:center;color:var(--muted);margin:20px 0 0;font-size:.96rem}
+#packages{padding-bottom:24px!important}
+#team.team-sec{padding-top:0!important}
+@media(max-width:620px){
+  #packages{padding-bottom:16px!important}
+  #team.team-sec{padding-top:0!important;padding-bottom:48px}
+}
 /* cta band */
 .band{
   background:linear-gradient(120deg,#1428A0,#2540E8,#5B6CFF,#3D5AFF,#1A2FB8);
@@ -724,7 +730,7 @@ dialog::backdrop{background:rgba(10,18,40,.65);backdrop-filter:blur(5px)}
 /* Team */
 .team-sec{background:var(--paper);position:relative;overflow:hidden}
 .team-sec::before{
-  content:"";position:absolute;top:90%;right:-10%;width:380px;height:380px;
+  content:"";position:absolute;top:20%;right:-10%;width:380px;height:380px;
   background:radial-gradient(circle,rgba(43,76,255,.12),transparent 70%);pointer-events:none
 }
 .team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
@@ -2128,8 +2134,8 @@ body::before{
       <a class="l" href="#ideas">Ideas</a>
       <a class="l" href="#featured">Featured</a>
       <a class="l" href="#projects">Projects</a>
-      <a class="l" href="#team">Team</a>
       <a class="l" href="#packages">Packages</a>
+      <a class="l" href="#team">Team</a>
       <a class="l" href="#reviews">Reviews</a>
       <a class="btn primary glow" href="#contact">Get my FYP</a>
     </nav>
@@ -2347,17 +2353,16 @@ body::before{
   </div>
 </section>
 
-<!-- <section class="blk" id="packages" style="padding-top:0">
+<section class="blk" id="packages" style="padding-top:0;padding-bottom:24px">
   <div class="wrap">
     <div class="head center rv"><h2>Choose how much help you need</h2><p>Three simple packages. Message us for the price that fits your project and deadline.</p></div>
     <div class="pks" id="pks"></div>
-    <p class="pnote" style="margin-top: -42%;">Student-friendly pricing. Payment and delivery are agreed clearly before we start.</p>
+    <p class="pnote">Student-friendly pricing. Payment and delivery are agreed clearly before we start.</p>
   </div>
-</section> -->
+</section>
 
-<section class="blk team-sec" id="team">
+<section class="blk team-sec" id="team" style="padding-top:0">
   <div class="wrap">
-    <div class="pks" id="pks"></div>
     <div class="head center rv">
       <h2>Meet the team behind your FYP</h2>
       <p>A small, focused team — engineering, AI and client success — so you always know who is helping you.</p>
@@ -2876,7 +2881,7 @@ $("tGrid").innerHTML=[
 
 /* Team + metrics + guarantees */
 $("teamGrid").innerHTML=[
- ["MK","Muzamil Khan","Founder & Lead Engineer","Guides product direction, architecture reviews and final delivery quality for every FYP and client build.",["Full stack","System design"]],
+ ["MK","Usama Ahmed","Founder & Lead Engineer","Guides product direction, architecture reviews and final delivery quality for every FYP and client build.",["Full stack","System design"]],
  ["AR","Ayesha Rahman","AI / ML Engineer","Specializes in computer vision, NLP and model integration so your AI modules are demo-ready and explainable.",["Python","TensorFlow","OpenCV"]],
  ["HS","Hassan Sheikh","Mobile & Frontend Lead","Flutter, React and polished UI — apps that look professional on viva day and in production.",["Flutter","React","UI/UX"]],
  ["SN","Sana Nadeem","Client Success","Keeps timelines clear, answers questions fast and prepares you for supervisor and viva checkpoints.",["Support","Docs","Viva prep"]]
@@ -3180,7 +3185,7 @@ const PK=[
  ["Custom FYP","Built around your idea and university format.",["Everything in Ready Project","Custom features and modules","Report, diagrams and slides","Progress updates"],"Custom FYP",1],
  ["Complete FYP + Viva","Full support from topic to defense.",["Everything in Custom FYP","Module-by-module walkthrough","Viva questions practice","Demo day support"],"Viva preparation",0]
 ];
-$("pks").innerHTML=PK.map(([t,d,l,need,best],i)=>`<article class="pk ${best?"best":""} rv" style="--d:${i*.1}s">${best?'<span class="in-bg"></span><span class="badge">Most chosen</span>':""}<h3>${t}</h3><p class="sub">${d}</p><ul>${l.map(x=>`<li>${x}</li>`).join("")}</ul><a class="btn ${best?"gold":"primary"}" href="#contact" data-need="${need}">Ask for price</a></article>`).join("");
+$("pks").innerHTML=PK.map(([t,d,l,need,best],i)=>`<article class="pk ${best?"best":""}" style="--d:${i*.1}s">${best?'<span class="in-bg"></span><span class="badge">Most chosen</span>':""}<h3>${t}</h3><p class="sub">${d}</p><ul>${l.map(x=>`<li>${x}</li>`).join("")}</ul><a class="btn ${best?"gold":"primary"}" href="#contact" data-need="${need}">Ask for price</a></article>`).join("");
 $("pks").addEventListener("click",e=>{const a=e.target.closest("[data-need]");if(a)$("fNeed").value=a.dataset.need});
 
 const techs=["React","Node.js","Flutter","Python","MongoDB","Firebase","TensorFlow","Django","Laravel","Next.js","OpenAI API","Unity","Android","MySQL","TypeScript","Express","Kotlin","Vue.js","PostgreSQL","YOLOv8"];
